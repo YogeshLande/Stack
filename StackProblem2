@@ -1,0 +1,110 @@
+//Q2 Two Stacks Using Array
+
+import java.util.Scanner;
+public class TwoStacks {
+    int stackArr[];
+    int top1;
+    int top2;
+    int maxsize;
+    TwoStacks(int Size){
+        this.stackArr=new int[Size];
+        this.top1=-1;
+        this.top2=Size;
+        this.maxsize=Size;
+    }
+    void push1(int data){
+        if (top2-top1>1){
+            top1++;
+            stackArr[top1]=data;
+        }
+        else{
+            System.out.println("Stack1 Overflow");
+        }
+    }
+    void push2(int data){
+        if (top2-top1>1){
+            top2--;
+            stackArr[top2]=data;
+        }
+        else{
+            System.out.println("Stack2 Overflow");
+        }
+    }
+    int pop1(){
+        if(top1==-1){
+            System.out.println("Stack1 is Empty");
+            return -1;
+        }
+        else {
+            int val =stackArr[top1];
+            top1--;
+            return val;
+        }
+    }
+    int pop2(){
+        if(top2==maxsize){
+            System.out.println("Stack2 is Empty");
+            return -1;
+        }
+        else {
+            int val =stackArr[top2];
+            top2++;
+            return val;
+        }
+    }
+
+}
+class Client1{
+    public static void main(String[]args){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a Size of an Array");
+        int Size = sc.nextInt();
+        TwoStacks obj = new TwoStacks(Size);
+        char ch;
+        do{
+            System.out.println("1.Push1");
+            System.out.println("2.Push2");
+            System.out.println("3.Pop1");
+            System.out.println("4.Pop2");
+
+            System.out.println("Enter Your Choice ");
+            int choice = sc.nextInt();
+            switch (choice){
+                case  1:{
+                    System.out.println("Enter a Element For Stack1");
+                    int data= sc.nextInt();
+                    obj.push1(data);
+                }
+                break;
+                case 2:{
+                    System.out.println("Enter a Element For Stack2");
+                    int data= sc.nextInt();
+                    obj.push2(data);
+                }
+                break;
+                case 3: {
+                    int ret = obj.pop1();
+                    if (ret != -1) {
+                        System.out.println(ret);
+                    }
+                }
+                    break;
+                    case 4:{
+                        int ret = obj.pop2();
+                        if(ret!=-1){
+                            System.out.println(ret);
+                        }
+                }
+                break;
+                default:{
+                    System.out.println("Wrong Choice");
+                }
+                break;
+            }
+            System.out.println("Do you Want to Continue");
+            ch=sc.next().charAt(0);
+
+        }while (ch=='y'||ch=='Y');
+    }
+
+}
